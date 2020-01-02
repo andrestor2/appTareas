@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DeseosService } from 'src/app/services/deseos.service';
 import { ActivatedRoute } from '@angular/router';
 import { Lista } from 'src/app/models/lista.model';
 import { ListaItem } from 'src/app/models/lista-item.model';
+import { IonList } from '@ionic/angular';
 
 @Component({
   selector: 'app-agregar',
@@ -13,6 +14,7 @@ export class AgregarPage implements OnInit {
 
   lista: Lista;
   nombreItem = '';
+  @ViewChild('slidingList', { static: false }) slidingList: IonList;
 
   constructor(
     private deseosService: DeseosService,
@@ -53,5 +55,11 @@ export class AgregarPage implements OnInit {
   cantidadItemsPendientes() {
     const pendiente = this.lista.items.filter(itemData => !itemData.completado);
     return pendiente.length;
+  }
+
+  async borrarItem(index: number) {
+    this.lista.items.splice(index, 1);
+    await this.slidingList.closeSlidingItems();
+    this.deseosService.guardarStorage();
   }
 }

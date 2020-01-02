@@ -56,7 +56,11 @@ export class Tab1Page {
       return;
     } else {
       const listaId = this.deseosService.crearLista(titulo);
-      this.router.navigate([`/tabs/tab1/agregar/${ listaId }`]);
+      this.router.navigate([`/tabs/tab1/agregar/${listaId}`]);
     }
+  }
+
+  listaSeleccionada(lista: Lista) {
+    this.router.navigate([`/tabs/tab1/agregar/${lista.id}`]);
   }
 }

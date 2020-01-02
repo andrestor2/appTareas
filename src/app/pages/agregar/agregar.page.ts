@@ -36,4 +36,22 @@ export class AgregarPage implements OnInit {
     this.nombreItem = '';
     this.deseosService.guardarStorage();
   }
+
+  cambioCheck(item) {
+    if (this.cantidadItemsPendientes() === 0) {
+      this.lista.terminadaEn = new Date();
+      this.lista.terminada = true;
+    } else {
+      if (this.lista.terminada) {
+        this.lista.terminadaEn = null;
+        this.lista.terminada = false;
+      }
+    }
+    this.deseosService.guardarStorage();
+  }
+
+  cantidadItemsPendientes() {
+    const pendiente = this.lista.items.filter(itemData => !itemData.completado);
+    return pendiente.length;
+  }
 }

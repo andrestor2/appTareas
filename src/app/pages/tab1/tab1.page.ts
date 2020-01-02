@@ -22,8 +22,6 @@ export class Tab1Page {
   }
 
   async agregarLista() {
-    //this.router.navigate(['/tabs/tab1/agregar']);
-
     const alert = await this.alertCtrl.create({
       header: 'Nueva lista',
       inputs: [
@@ -57,7 +55,8 @@ export class Tab1Page {
     if (titulo === 0) {
       return;
     } else {
-      this.deseosService.crearLista(titulo);
+      const listaId = this.deseosService.crearLista(titulo);
+      this.router.navigate([`/tabs/tab1/agregar/${ listaId }`]);
     }
   }
 }

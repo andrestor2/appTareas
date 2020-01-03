@@ -14,12 +14,10 @@ export class Tab1Page {
   listas: Lista[] = [];
 
   constructor(
+    private alertCtrl: AlertController,
     private deseosService: DeseosService,
-    public router: Router,
-    private alertCtrl: AlertController) {
-
-    this.listas = deseosService.listas;
-  }
+    private router: Router
+  ) { }
 
   async agregarLista() {
     const alert = await this.alertCtrl.create({
@@ -58,9 +56,5 @@ export class Tab1Page {
       const listaId = this.deseosService.crearLista(titulo);
       this.router.navigate([`/tabs/tab1/agregar/${listaId}`]);
     }
-  }
-
-  listaSeleccionada(lista: Lista) {
-    this.router.navigate([`/tabs/tab1/agregar/${lista.id}`]);
   }
 }

@@ -5,7 +5,6 @@ import { Lista } from '../models/lista.model';
   providedIn: 'root'
 })
 export class DeseosService {
-
   public listas: Lista[] = [];
 
   constructor() {
@@ -40,6 +39,11 @@ export class DeseosService {
   eliminarLista(lista: Lista) {
     this.listas =
       this.listas.filter(listaData => listaData.id !== lista.id);
+    this.guardarStorage();
+  }
+
+  editarNombre(nombreLista: string, lista: Lista) {
+    lista.titulo = nombreLista;
     this.guardarStorage();
   }
 }
